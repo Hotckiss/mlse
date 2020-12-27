@@ -7,8 +7,8 @@ from training.utils import scale_dataset
 
 
 def load_data(paths_to_csv: typing.List[str], features_to_drop: typing.List[str], scale: bool = True,
-              shuffle: bool = True, equal_classes: bool = True, img_name: str = None):
-    dataframes = [pd.read_csv(path) for path in paths_to_csv]
+              shuffle: bool = True, equal_classes: bool = True, img_name: str = None, path_prefix="./"):
+    dataframes = [pd.read_csv(path_prefix + path) for path in paths_to_csv]
     data = dataframes[0]
     for frame in dataframes[1:]:
         data = data.append(frame)

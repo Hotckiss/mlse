@@ -11,7 +11,7 @@ from training.utils import save_results, get_all_models
 ADDITIONAL_FEATURES = ["compositeTypesRatio", "connectivity", "importsCount", "namesLenAvg", "namesStartNotLetterRatio", "top1a", "top1c", "top2a", "top2c", "top3a", "top3c", "top4a", "top4c"]
 
 
-def run_experiment(logs_dir, exp_name, train_list, test_list, removed_features):
+def run_experiment(logs_dir, exp_name, train_list, test_list, removed_features, path_prefix="./"):
     print(f'Train list: {train_list}', flush=True)
     print(f'Test list: {test_list}', flush=True)
 
@@ -74,10 +74,10 @@ if __name__ == '__main__':
                 train_current.append(data_list[j])
 
         run_experiment("full_data_base_features", f'full_data_base_features_test_set_{dataset.split(".")[0]}',
-                       train_current, test_current, ADDITIONAL_FEATURES)
+                       train_current, test_current, ADDITIONAL_FEATURES, path_prefix="../datasets")
 
         run_experiment("full_data_all_features", f'full_data_all_features_test_set_{dataset.split(".")[0]}',
-                       train_current, test_current, ADDITIONAL_FEATURES)
+                       train_current, test_current, [], path_prefix="../datasets")
 
     train_data_list = ["non_generated_c2v_train.csv"]
     test_data_list = ["non_generated_c2v_test.csv"]
@@ -92,4 +92,4 @@ if __name__ == '__main__':
                 train_current.append(data_list[j])
 
         run_experiment("c2v", f'c2v_test_set_{dataset.split(".")[0]}',
-                       train_current, test_current, [])
+                       train_current, test_current, [], path_prefix="../datasets")
